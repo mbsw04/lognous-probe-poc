@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  # 1. Log Hub
+  openobserve:
+    image: public.ecr.aws/zinclabs/openobserve:latest
+    ports: ["5080:5080"]
+    environment:
+      - ZO_ROOT_USER_EMAIL=root@example.com
+      - ZO_ROOT_USER_PASSWORD=Complexpass#123
+    volumes: ["./zo_data:/data"]
+
+  # 2. Vector Database
+  qdrant:
+    image: qdrant/qdrant:latest
+    ports: ["6333:6333"]
+    volumes: ["./qdrant_data:/qdrant/storage"]
+
+  # 3. AI Result Storage
+  postgres:
+    image: postgres:15-alpine
+    environment:
+      - POSTGRES_USER=logprobe
+      - POSTGRES_PASSWORD=probe_pass
+      - POSTGRES_DB=logprobe_results
+    ports: ["5432:5432"]
+    volumes: ["./pg_data:/var/lib/postgresql/data"]
+
+  # 4. Custom App Logic (The Probe)
+  log-probe-app:
+    build: ./app
+    depends_on: [openobserve, qdrant, postgres]
+    environment:
+      - DEEPSEEK_API_KEY=your_actual_key_here
+      - OPENOBSERVE_URL=http://openobserve:5080
+      - QDRANT_URL=http://qdrant:6333
