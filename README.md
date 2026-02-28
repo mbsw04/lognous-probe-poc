@@ -47,6 +47,3 @@ The `log-probe-app` service will start and poll OpenObserve every 5 seconds.
 3. **Enrichment** – a simple text-based query is sent to the Qdrant vector database to fetch related documents.
 4. **AI analysis** – the service constructs a prompt containing the error, context and Qdrant hits, then posts it to the chosen AI provider. A good prompt is one that clearly describes the problem and asks the model to propose likely causes and fixes.
 5. **Notification** – the resulting analysis is forwarded to any configured notification channels (Slack/Discord/email).
-
-## Extending the Probe
-adapt the OpenObserve queries, enrich Qdrant prompts, or improve the notification formatting to suit your environment.
