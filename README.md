@@ -12,7 +12,7 @@ This repository contains a proof‑of‑concept Python service that polls an Ope
 * Optional: Slack webhook URL, Discord webhook URL or SMTP credentials for notification delivery
 
 ### Configuration
-Copy `docker-compose.yml` and adjust the `log-probe-app` environment section:
+In `docker-compose.yml` adjust the `log-probe-app` environment section:
 
 ```yaml
     environment:
