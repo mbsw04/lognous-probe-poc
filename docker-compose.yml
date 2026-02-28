@@ -31,6 +31,21 @@ services:
     build: ./app
     depends_on: [openobserve, qdrant, postgres]
     environment:
-      - DEEPSEEK_API_KEY=your_actual_key_here
+      - Tool=DEEPSEEK
+      - API_KEY=your_actual_key_here
       - OPENOBSERVE_URL=http://openobserve:5080
       - QDRANT_URL=http://qdrant:6333
+      # PostgreSQL connection
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PORT=5432
+      - POSTGRES_USER=logprobe
+      - POSTGRES_PASSWORD=probe_pass
+      - POSTGRES_DB=logprobe_results
+      # optional notification targets (set one or more)
+      - SLACK_WEBHOOK_URL=
+      - DISCORD_WEBHOOK_URL=
+      - EMAIL_TO=
+      - SMTP_SERVER=
+      - SMTP_PORT=
+      - SMTP_USER=
+      - SMTP_PASS=

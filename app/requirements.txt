@@ -1,0 +1,4 @@
+requests
+qdrant-client
+openai
+anthropicpsycopg2-binary
